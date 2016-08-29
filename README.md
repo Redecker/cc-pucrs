@@ -10,5 +10,4 @@ This repository is to save my latex projects.
 
 Please if you use something inside this repository be sure to give credit
 
-Matheus Redecker
-matheus.redecker@acad.pucrs.br
+Matheus Redecker - matheus.redecker@acad.pucrs.br

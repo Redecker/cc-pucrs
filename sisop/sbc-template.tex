@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+%\usepackage[latin1]{inputenc}  
+\usepackage[utf8]{inputenc}  
+% UTF-8 encoding is recommended by ShareLaTex
+
+     
+\sloppy
+
+\title{P3 - Sistemas Operacionais }
+
+\author{Matheus S. Redecker }
+
+
+\address{Pontifícia Universidade Católica do Rio Grande do Sul - PUCRS}
+
+\begin{document} 
+
+\maketitle
+
+\section{} %1
+Endereços lógicos iguais podem ter diferentes endereços físicos, endereço físico são endereços em memória real, e endereços lógicos são endereços 'criados' para a execução de processos.
+
+\section{} %2
+Fragmentação externa é quando processos vão deixando de existir e com isso vão deixando espaços cada vez menores e assim não deixando novos programas entrarem, mesmo tendo espaço total mas não tem espaço continuo para alocar, já fragmentação interna é a perda de memória em um tamanho fixo, processos pequenos e espaços de memória reservados muito grande com isso o processo não abrange toda a área reservada e essa área não é usada.
+
+\section{} %3
+1024 * 2  = 2k por pagina então 2*8 tamanho da tabela = 16K que precisa de 14bits para endereço logicos.\\
+2048 * 32 =  64K que é o tamanho total da tabele então precisa de 16 bits para endereçar a memoria fisica. 
+\section{} %4
+O sistema consulta na tabela de paginas o endereço correspondente na memória física, assim sabemos qual é moldura para aquele endereço virtual(SOFTWARE), se não encontramos ali o endereço temos um page fold e temos que carregar a pagina para a memória física(HARDWARE).
+\section{} %5
+O processo "a" terá mais page folds e não irá usar o que buscar da memoria, já o processo "b" será beneficiado pelo page fold, cada um que tiver ele carregara 199 elementos que serão acessados no futuro, o que não acontece no processo "a" pois ele carregara eventualmente algum endereço que será realmente usado. 
+\section{} %6
+%4094 ~ 2^11+1 2^12 2k
+%8292 ~ 2^13+1 2^14 4k
+a) Como temos paginas de 4K, então do endereço 0~4096 é a primeira pagina,ou seja, pagina virtual zero com isso o endereço 4094 será traduzido para a moldura 2 de acordo com a tabela, e o endereço 8292 estará na pagina virtual 2 que vai de 8193~16384 e será traduzido para a moldura 6.
+\\
+b) Na tabela invertida cada entrada é representada por uma hash composta por a pagina virtual e a moldura, então temos:
+
+\begin{table}[ht]
+\centering
+\caption{Tabela Invertida}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c}
+\hline   
+\hline   
+-&pid & endvirtual \\
+\hline   
+0 & 0 & 3 \\
+1 & 0 & 1 \\
+2 & 0 & 0 \\
+3 & 0 & 5 \\
+4 & 0 & 4 \\
+5 & 0 & 9 \\
+6 & 0 & 2 \\
+7 & 0 & 11 \\
+\hline   
+\hline   
+\end{tabular}
+\end{table}
+
+ Com isso os endereços serão endereçados em: \\
+ 1- 4094: será preciso do par (0,0) então moldura 2\\
+ 2- 8292: será preciso do par (0,2) então moldura 6
+
+c) 
+
+\begin{table}[ht]
+\centering
+\caption{Primeiro nivel}
+\vspace{0.5cm}
+\begin{tabular}{c|c}
+\hline   
+\hline   
+- &pt1 \\
+\hline   
+0 & pt2 \\
+1 & -\\
+2 & - \\
+3 & - \\
+\hline   
+\hline   
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Segundo nivel}
+\vspace{0.5cm}
+\begin{tabular}{c|c}
+\hline   
+\hline   
+- &pt2 \\
+\hline   
+0 & 1 \\
+1 & 0 \\
+2 & - \\
+3 & - \\
+\hline   
+\hline   
+\end{tabular}
+\end{table}
+
+\newpage
+\section{} %7
+a,b) Veja a tabela abaixo:
+
+\begin{table}[ht]
+\centering
+\caption{Tabela Convencional}
+\vspace{0.9cm}
+\begin{tabular}{c|c|c|c}
+\hline   
+\hline   
+pagina & bitvalidade & moldura & cont LRU \\
+\hline   
+0 & 0 & - & - \\
+1 & 1 & 1 & 1\\
+2 & 1 & 3 & 0\\
+3 & 1 & 2 & 0\\
+4 & 0 & - & -\\
+5 & 0 & - & -\\
+6 & 0 & - & -\\
+7 & 0 & - & -\\
+8 & 0 & - & -\\
+9 & 0 & - & -\\
+10 & 0 & - & -\\
+11 & 0 & - & -\\
+12 & 0 & - & -\\
+13 & 0 & - & -\\
+14 & 0 & - & -\\
+15 & 1 & 0 & 0 \\
+\hline 
+\hline 
+\end{tabular}
+
+\end{table}
+
+
+\section{} %8
+Mapa de bits: O sistema operacional mantém um bit para cada bloca da memoria para indicar se o mesmo está livre ou ocupado, as vantagens é a simplicidade de implementação já as desvantagem seria quanto mais um processo necessita de unidades de alocação o gerenciador de memoria necessita encontrar uma sequencia equivalente de bits 0 e isso é um processo lento.\\
+Lista encadeadas: É mantido uma lista encadeada de segmentos de memorias que podem conter os espaços de memoria livres e também alocadas, as vantagens é que fica facil de encontrar espaços vagos para novas entradas e colocar essa nova entrada é muito simples, mas como desvantagens é a fragmentação externa, pois dependendo vamos ter 'buracos' tão pequenos que não caberão nenhum processo.
+\section{} %9
+a) Verdadeiro, pois quanto mais molduras maior será a quantidade de paginas que conseguiremos endereçar guardar.
+\\
+b) Falso, o processo de segmentação pura causa apenas fragmentação externa.
+\\
+c) Verdadeiro.
+\\
+d) Verdadeiro, dependendo da aplicação, como por exemplo acesso de matrizes.
+\\
+e) Falso, a MMU força uma interrupção e o Sistema Operacional faz o tratamento do page fold.
+\end{document}

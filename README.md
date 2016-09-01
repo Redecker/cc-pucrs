@@ -4,8 +4,7 @@ This repository is to save my latex academic projects.
 
 ## Computer Science - PUCRS
 
-- [Projeto de Interfaces](interface) - [T1](interface/t1)
-				     - [T2](interface/t2)
+- [Projeto de Interfaces](interface) 
 - [Sistemas Operacionais(cc)](sisop)
 - [Redes de Computadores I](redesI)
 - [Laboratorio de Redes de Computadores](labredes)

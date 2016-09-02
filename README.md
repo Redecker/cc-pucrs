@@ -24,9 +24,9 @@ This repository is to save my academic projects.
 ###Code
 - Soon
 
-###Publications(publications)
-- Comparing Approaches to Subjectivity Classification: A Study on Portuguese Tweets
-- Classificação de Sentimentos em Nível de Sentença: uma Abordagem de Múltiplas Camadas para Tweets em Língua Portuguesa (Soon)
+###[Publications](publications)
+- Comparing Approaches to Subjectivity Classification: A Study on Portuguese Tweets - PROPOR 2016
+- Classificação de Sentimentos em Nível de Sentença: uma Abordagem de Múltiplas Camadas para Tweets em Língua Portuguesa - ENIAC 2016 (Soon)
 
 Please if you use something inside this repository be sure to give credit
 

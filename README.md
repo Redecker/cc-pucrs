@@ -9,17 +9,17 @@ This repository is to save my academic projects.
 - [Projeto de Interfaces](latex/interface) 
 - [Sistemas Operacionais(cc)](latex/sisop)
 - [Redes de Computadores I](latex/redesI)
-- [Laboratorio de Redes de Computadores](latex/labredes)
+- [Laboratório de Redes de Computadores](latex/labredes)
 - [Métodos Computacionais(cc)](latex/metodos)
-- [Inteligencia Artificial](latex/ai)
+- [Inteligência Artificial](latex/ai)
 - [Sistemas Embarcados](latex/embarcados)
 - [Entretenimento Digital](latex/entretenimento)
 - [Programação Paralela](latex/paralela)
 - [Redes de Computadores II](latex/redesII)
 - [Redes de Computadores III](latex/redesIII)
-- [Programação de Perifericos](latex/perifericos)
-- [](latex/entrep)
-- [](latex/msi)
+- [Programação de Periféricos](latex/perifericos)
+- [Fundamentals of Digital Entrepreneurship](latex/entrep)
+- [Management of Information Systems](latex/msi)
 
 ###Code
 - Soon

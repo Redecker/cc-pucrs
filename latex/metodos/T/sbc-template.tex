@@ -1,0 +1,559 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+%\usepackage[latin1]{inputenc}  
+\usepackage[utf8]{inputenc}  
+% UTF-8 encoding is recommended by ShareLaTex
+
+\usepackage{minted}
+\usepackage{todonotes}
+\sloppy
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes}
+
+\definecolor{myblue}{cmyk}{0.94,0.54,0,0}
+
+\tikzstyle{snippet}=[draw=myblue,fill=none,thick,
+                   text width=0.85\textwidth,rectangle,
+                   rounded corners=0pt,inner sep=0pt,inner ysep=10pt]
+\tikzstyle{title}=[fill=white,text=myblue,rectangle]
+
+\title{Convergência de Métodos Iterativos}
+
+\author{Matheus S. Redecker\inst{1}, Thomás Vieira\inst{1}}
+
+
+\address{Pontifícia Universidade Católica do Rio Grande do Sul - PUCRS
+  \email{  matheus.redecker, thomas.vieira}{@acad.pucrs.br}
+}
+
+\begin{document} 
+
+\maketitle
+\section{Introdução}
+Operações matemáticas estão presentes em todo o lugar, e em particular na computação, um computador é capaz de fazer operações simples como as de uma calculadora, exemplo $3+3$, $10-3$, $5!$, e também operações que geram números infinitos, exemplo $\sqrt{2}$, $\frac{2}{3}$. Mas como guardar o resultado dessa operação sem perder o seu valor?. Para isso temos o conceito de ponto flutuante, que nada mais é de como representar um número real de acordo com uma precisão em uma faixa de números possíveis. Então aritmética de ponto flutuante é a utilização do ponto flutuante sobre operações aritméticas em precisão finita. \\
+Para realizar esse tipo de operações temos que entender o que são algoritmos numéricos, que serão a base para todo o estudo presente nesse artigo, algoritmos numéricos são algoritmos voltados ao processamento numérico\cite{Dalcidio:00}, o que significa que esse tipo de algoritmo tem como objetivo resolver um problema matemático. 
+Dentro de algoritmos numéricos estão presentes os métodos iterativos, que são usados para gerar sequência iterativas que aproximam o resultado de alguma formula ou sequência, que podem convergir para uma resposta ou não, dependendo dos critérios de avaliação de quem construiu o algoritmo. \\
+O Brasil está presente no estudo de métodos computacionais, com o Laboratório Nacional de Computação Científica(LNCC) e também a Sociedade Brasileira de Matemática Aplicada e Computacional(SBMAC), buscam o conhecimento e aperfeiçoamento dos métodos atuais, atuando também na aplicação dos métodos já existentes em processamento de alto desempenho. Mundialmente conhecido o Numerical Algorithms Group(NAG), desenvolve também métodos computacionais e ainda oferece serviços de alta performance computacional, um exemplo de produto feito por eles está o compilador de Fortran utilizado até hoje.
+
+\section{Cálculos Iterativos}
+Neste item estão apresentados alguns dos números infinitos, mas também irracionais citados na Introdução que são muito importantes, não só para a computação, mas para outras áreas como a matemática, física, entre outras, junto com eles está apresentado uma breve descrição, uma maneira de como calcular utilizando o conceito de algoritmos numéricos junto com métodos iterativos, e também sua avaliação a partir de algum critério definido no problema para determinar sua precisão e sua convergência. Todos os algoritmos serão implementados na linguagem Python, a escolha da linguagem foi dada pelo fato de ser clara, objetiva e coesa, sendo assim, facilmente traduzida para qualquer outra linguagem.  
+
+\subsection{O número de ouro}
+O número de ouro, também chamado de proporção áurea, é denotado pela letra grega $\phi$, este número é uma constante matemática que sempre esteve presente nos estudos ao longo dos anos, pelo fato de ser um número que está presente em várias formas na natureza, como por exemplo, na medida dos ossos dos dedos dos seres humanos, na série de Fibonacci, na proporção das abelhas machos e fêmeas e também na arquitetura do Partenon, na Grécia. Seu valor com aproximação de onze casas decimais é $1,61803398875$. \\ 
+Será apresentado duas maneiras de calcular o numero de ouro, utilizando algoritmos numéricos com critério de parada por precisão 10, ou pelo numero de iterações igual a 50. O primeiro algoritmo é realizando a partir de  frações continuadas como $1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}$\cite{GoldenRatio}. Pode ser visto que o algoritmo 1 retrata a formula e com a sua execução foi montado a tabela\ref{tabouro1}. O segundo algoritmo utiliza uma serie de raízes como $\sqrt{1 + \sqrt{1 + \sqrt{1 + \sqrt{1 + ...}}}}$\cite{GoldenRatio}. Pode ser visto que o algoritmo 2 retrata essa formula e com a sua execução foi montada a tabela \ref{tabouro2}. Para comparar as abordagens foi feito uma tabela onde estão apresentados os dados referentes a execução de cada algoritmo para a comparação, nela é visto que os dois convergem para o resultado como o erro absoluto representa, mas o segundo algoritmo atinge a marca de precisão 10 mais rápido do que o primeiro algoritmo.
+
+
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+ouro = 1.0
+iteracoes = 1
+phi = 1.61803398875
+while iteracoes < 50:
+	if abs(phi - ouro) <= 0.00000000001:
+		break	
+	ouro = 1 + (1.0/ouro)
+	iteracoes += 1
+\end{minted}
+};;
+\node[title] at (box.north) {Algoritmo 1};
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\caption{Numero de Ouro algoritmo 1}
+\vspace{0.1cm}
+\begin{tabular}{c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto \\
+\hline   
+1 & 1,0 & 0,61803398875 \\
+3 & 1,5 & 0,11803398875 \\
+5 & 1,6 & 0,01803398875 \\
+7 & 1,61538461538 & 0,00264937336538 \\
+9 & 1,61764705882 & 0,00038692992647 \\
+11 & 1,61797752809 & 5,64606601123e-05 \\
+13 & 1,61802575107 & 8,2376770385e-06 \\
+15 & 1,61803278689 & 1,20186475416e-06 \\
+17 & 1,6180338134 & 1,75349874842e-07 \\
+19 & 1,61803396317 & 2,55832934837e-08 \\
+21 & 1,61803398502 & 3,73264197329e-09 \\
+23 & 1,61803398821 & 5,44674749747e-10 \\
+25 & 1,61803398867 & 7,95565835432e-11 \\
+27 & 1,61803398874 & 1,16968656982e-11 \\
+28 & 1,61803398875 & 4,32254232408e-12 \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabouro1}
+\end{table} 
+
+\newpage{}
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+def numOuro(fracoes):
+	if fracoes == 0:
+		return 1
+	fracoes -= 1
+	return math.sqrt(1 + numOuro(fracoes))
+
+ouro = 1.0
+iteracao = 1
+phi = 1.61803398875
+
+while iteracao < 50:
+	if abs(phi - ouro) <= 0.00000000001:
+		break	
+	ouro = numOuro(k)
+	iteracao += 1
+\end{minted} 
+};;
+\node[title] at (box.north) {Algoritmo 2};
+\end{tikzpicture}
+
+
+\begin{table}[ht]
+\centering
+\caption{Numero de Ouro algoritmo 2}
+\vspace{0.1cm}
+\begin{tabular}{c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto \\
+\hline   
+1 & 1,0 & 0,61803398875 \\
+3 & 1,41421356237 & 0,203820426377 \\
+5 & 1,59805318248 & 0,0199808062714 \\
+7 & 1,61612120651 & 0,00191278224188 \\
+9 & 1,61785129061 & 0,000182698140325 \\
+11 & 1,61801654223 & 1,74465185123e-05 \\
+13 & 1,61803232275 & 1,665998e-06 \\
+15 & 1,61803382966 & 1,59088781038e-07 \\
+17 & 1,61803397356 & 1,51917221025e-08 \\
+19 & 1,6180339873 & 1,45077549973e-09 \\
+21 & 1,61803398861 & 1,38631772728e-10 \\
+23 & 1,61803398874 & 1,33331123919e-11 \\
+24 & 1,61803398875 & 4,1928682748e-12 \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabouro2}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Numero de Ouro Comparação dos Algoritmos}
+\vspace{0.1cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+ite & resultado 1 & erro absoluto 1 & ite & resultado 2 & erro absoluto 2 \\
+\hline   
+1 & 1,0 & 0,61803398875 & 1 & 1,0 & 0,61803398875 \\
+3 & 1,5 & 0,11803398875 & 3 & 1,41421356237 & 0,203820426377 \\
+5 & 1,6 & 0,01803398875 & 5 & 1,59805318248 & 0,0199808062714 \\
+7 & 1,61538461538 & 0,00264937336538 & 7 & 1,61612120651 & 0,00191278224188 \\
+9 & 1,61764705882 & 0,00038692992647 & 9 & 1,61785129061 & 0,000182698140325 \\
+11 & 1,61797752809 & 5,64606601123e-05 & 11 & 1,61801654223 & 1,74465185123e-05 \\
+13 & 1,61802575107 & 8,2376770385e-06 & 13 & 1,61803232275 & 1,665998e-06 \\
+15 & 1,61803278689 & 1,20186475416e-06 & 15 & 1,61803382966 & 1,59088781038e-07 \\
+17 & 1,6180338134 & 1,75349874842e-07 & 17 & 1,61803397356 & 1,51917221025e-08 \\
+19 & 1,61803396317 & 2,55832934837e-08 & 19 & 1,6180339873 & 1,45077549973e-09 \\
+21 & 1,61803398502 & 3,73264197329e-09 & 21 & 1,61803398861 & 1,38631772728e-10 \\
+23 & 1,61803398821 & 5,44674749747e-10 & 23 & 1,61803398874 & 1,33331123919e-11 \\
+24 & 1,61803398896 & 2,07901917904e-10 & 24 & 1,61803398875 & 4,1928682748e-12 \\
+25 & 1,61803398867 & 7,95565835432e-11 & 25 & 1,61803398875 & 1,36823885555e-12 \\
+27 & 1,61803398874 & 1,16968656982e-11 & 27 & 1,61803398875 & 2,25597318604e-13 \\
+28 & 1,61803398875 & 4,32254232408e-12 & 28 & 1,61803398875 & 1,42330591757e-13 \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabourocomp}
+\end{table}
+
+\newpage{}
+
+\subsection{Constante de Euler ($e$)}
+A constante de Euler é uma constante matemática importante que serve de base para os logaritmos naturais. Uma de suas aplicações está no cálculo de juros compostos, o que foi a motivação para sua descoberta e estudo. Seu valor com dez casas decimais é $ 2,71828182846$. \\
+Será apresentado duas maneiras de calcular a constante de Euler utilizando algoritmos numéricos com critério de parada por precisão 10, ou pelo numero de iterações igual a 50. O primeiro algoritmo é realizando a partir de frações continuadas expressada como $\sum\limits_{k=1}^{\infty} \frac{1}{k!}$\cite{Euler}. Pode ser visto que o algoritmo 3 retrata a formula e com a sua execução foi montado a tabela \ref{tabeuler1}. O segundo algoritmo utiliza uma serie infinita expressada como $\sum\limits_{k=1}^{\infty} \frac{k^4}{15 * k!}$\cite{EulerPort}. Pode ser visto que o algoritmo 4 retrata a formula e com a sua execução foi montada a tabala \ref{tabeuler2}. Para comparar foi montado uma tabela comparando os resultados que pode ser vista na tabela \ref{tabeulercomp}, nela pode se ver que os dois algoritmos convergem para a resposta certa, mas o segundo algoritmo converge mais rápido, com isso pode ser afirmado que o algoritmo mais eficiente é o segundo.
+
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+euler = 1
+iteracao = 1
+e = 2.71828182846
+while iteracao < 50:
+	if abs(e - euler) <= 0.00000000001:
+		break	
+	euler += 1.0/fat(iteracao)
+	iteracao += 1
+\end{minted} 
+};;
+\node[title] at (box.north) {Algoritmo 3};
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\caption{Constante de Euler algoritmo 3}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto \\
+\hline   
+1 & 2,0 & 0,71828182846 \\
+2 & 2,5 & 0,21828182846 \\
+4 & 2,70833333333 & 0,00994849512667 \\
+6 & 2,71805555556 & 0,000226272904444 \\
+8 & 2,71827876984 & 3,05861872985e-06 \\
+10 & 2,71828180115 & 2,73136153695e-08 \\
+12 & 2,71828182829 & 1,73831171679e-10 \\
+14 & 2,71828182846 & 1,76969550125e-12 \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabeuler1}
+\end{table}
+
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+euler = 0.0
+iteracao = 1
+e = 2.71828182846
+while iteracao < 50:
+	if abs(e - euler) <= 0.00000000001:
+		break	
+	euler += pow(iteracao,4)
+	/ (15.0 * fat(iteracao))
+	iteracao += 1
+\end{minted} 
+};;
+\node[title] at (box.north) {Algoritmo 4};
+\end{tikzpicture}
+
+
+\begin{table}[ht]
+\centering
+\caption{Constante de Euler algoritmo 4}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto\\
+\hline   
+1 & 0,0666666666667 & 2,65161516179 \\
+2 & 0,6 & 2,11828182846 \\
+4 & 2,21111111111 & 0,507170717349 \\
+6 & 2,67833333333 & 0,0399484951267 \\
+8 & 2,71686507937 & 0,00141674909492 \\
+10 & 2,71825415197 & 2,76764905696e-05 \\
+12 & 2,7182814905 & 3,37959758845e-07 \\
+14 & 2,71828182565 & 2,8075142211e-09 \\
+16 & 2,71828182844 & 1,77777792487e-11 \\
+18 & 2,71828182846 & 1,03028696685e-12 \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabeuler2}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Constante de Euler Comparação dos algoritmos}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+ite & resultado 1 & erro absoluto 1 & ite & resultado & erro absoluto 2\\
+\hline   
+1 & 2,0 & 0,71828182846 &1 & 0,0666666666667 & 2,65161516179 \\
+2 & 2,5 & 0,21828182846&2 & 0,6 & 2,11828182846 \\
+4 & 2,70833333333 & 0,00994849512667&4 & 2,21111111111 & 0,507170717349 \\
+6 & 2,71805555556 & 0,000226272904444&6 & 2,67833333333 & 0,0399484951267 \\
+8 & 2,71827876984 & 3,05861872985e-06&8 & 2,71686507937 & 0,00141674909492 \\
+10 & 2,71828180115 & 2,73136153695e-08&10 & 2,71825415197 & 2,76764905696e-05 \\
+12 & 2,71828182829 & 1,73831171679e-10&12 & 2,7182814905 & 3,37959758845e-07 \\
+14 & 2,71828182846 & 1,76969550125e-12&14 & 2,71828182565 & 2,8075142211e-09 \\
+16 & 2,71828182846 & 9,57012247227e-13&16 & 2,71828182844 & 1,77777792487e-11 \\
+18 & 2,71828182846 & 9,54347711968e-13& 18 & 2,71828182846 & 1,03028696685e-12 \\
+
+\hline   
+\hline   
+\end{tabular}
+\label{tabeulercomp}
+\end{table}
+
+\newpage{}
+
+\subsection{$\pi$}
+O PI é outra constante matemática importante, que está associada ao perímetro de uma circunferência e seu diâmetro, com isso o número está presente em várias formulas da geométria e da trigonometria. Seu valor com dez casas decimais é $3,1415926535$. \\
+Será apresentado duas maneiras de calcular o numero de PI utilizando algoritmos numéricos com critério de parada por precisão 6, ou pelo numero de iterações igual a 1000000. O primeiro algoritmo é realizando a partir de uma serie infinita representado por $\sum\limits_{k=1}^{\infty} \frac{-1^k-1 * 4}{2k-1}$\cite{Pi}. Pode ser visto o algoritmo 5 retrata a formula e com a sua execução foi montado a tabela \ref{tabpi1}. O segundo algoritmo utiliza series infinitas para calcular $\pi^2$, essa formula é apresentada como $6*\sum\limits_{k=1}^{\infty} \frac{1}{k^2}$\cite{piwolf}. Pode ser visto o algoritmo 6 que retrata a formula e com a sua execução foi montada a tabela \ref{tabpi2}. Para comparar a eficiencia dos algoritmos foi montada a tabela \ref{tabpicomp}, a convergência das formulas pode ser vista na tabela e nela também podemos ver que não foi obtido o critério de parada por exatidão, então o algoritmo parou pelo numero de iterações. Com isso o custo computacional para calcular cinco casas decimais de pi é alta com qualquer uma dessas formulas.
+
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+pi = 0.0
+iteracao = 1
+t = 3.1415926535
+while iteracao < 1000000:
+	if abs(t - pi) <= 0.000001:
+		break
+	pi += pow(-1,iteracao-1)
+	* (4.0/(2*iteracao-1))
+	iteracao += 1
+\end{minted} 
+};;
+\node[title] at (box.north) {Algoritmo 5};
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\caption{Numero PI algoritmo 5}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto & iteração & resultado & erro absoluto \\
+\hline   
+1 & 4,0 & 0,8584073465 &550000 & 3,14159447177 & 1,81827480317e-06 \\
+50000 & 3,14161265399 & 2,00004897852e-05  &600000 & 3,14159432026 & 1,66675912583e-06 \\
+100000 & 3,14160265369 & 1,00001897203e-05  &650000 & 3,14159419205 & 1,53855360452e-06 \\
+150000 & 3,1415993203 & 6,66680085537e-06  &700000 & 3,14159408216 & 1,42866315889e-06 \\
+200000 & 3,14159765361 & 5,00011476179e-06  &750000 & 3,14159398692 & 1,33342480257e-06 \\
+250000 & 3,14159665361 & 4,00010578083e-06  &800000 & 3,14159390359 & 1,25009127983e-06 \\
+300000 & 3,14159598693 & 3,33343424197e-06  &850000 & 3,14159383006 & 1,17656170495e-06 \\
+350000 & 3,14159551074 & 2,85724077953e-06  &900000 & 3,1415937647 & 1,11120210766e-06 \\
+400000 & 3,1415951536 & 2,50009599378e-06 &950000 & 3,14159370622 & 1,05272246476e-06 \\
+450000 & 3,14159487582 & 2,22231688607e-06  &1000000 & 3,14159365359 & 1,00009077419e-06 \\
+500000 & 3,14159465359 & 2,000093692e-06  & -  & - & \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabpi1}
+\end{table}
+
+\newpage{}
+
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+pi = 0.0
+iteracao = 1
+t = 3.1415926535
+while iteracao < 1000001:
+	if abs(t - math.sqrt(6*pi)) <= 0.0000001:
+		break
+	pi += 1.0 / pow(iteracao,2)
+	iteracao += 1
+\end{minted}
+};;
+\node[title] at (box.north) {Algoritmo 6};
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\caption{Numero de pi Algoritmo 6}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto & iteração & resultado & erro absoluto \\
+\hline   
+1 & 2,44948974278 & 0,692102910717 &500000 & 3,14159074373 & 1,90977198766e-06\\
+50000 & 3,14157355475 & 1,90987524036e-05 &550000 & 3,14159091735 & 1,73614797427e-06\\
+100000 & 3,14158310423 & 9,54926903685e-06 &600000 & 3,14159106204 & 1,59146133161e-06\\
+150000 & 3,14158628736 & 6,36613558491e-06 &650000 & 3,14159118447 & 1,46903419651e-06\\
+200000 & 3,14158787893 & 4,77457405035e-06 &700000 & 3,1415912894 & 1,36409666585e-06\\
+250000 & 3,14158883386 & 3,81963878349e-06 & 750000 & 3,14159138035 & 1,27315081766e-06\\
+300000 & 3,14158947048 & 3,18301595881e-06 &800000 & 3,14159145993 & 1,19357321449e-06\\
+350000 & 3,14158992521 & 2,72828570713e-06 &900000 & 3,14159159256 & 1,06094389052e-06 \\
+400000 & 3,14159026626 & 2,38723821644e-06 &950000 & 3,1415916484 & 1,00509997125e-06\\
+450000 & 3,14159053152 & 2,12197916438e-06 & 1000000 & 3,14159169866 & 9,54840446266e-07\\
+\hline   
+\hline   
+\end{tabular}
+\label{tabpi2}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Numero de PI Comparação dos Algoritmos}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+ite1 & resultado 1 & erro absoluto 1 & ite2 & resultado 2 & erro absoluto 2\\
+\hline   
+1 & 4,0 & 0,8584073465 & 1 & 2,44948974278 & 0,692102910717 \\
+50000 & 3,14161265399 & 2,00004897852e-05 & 50000 & 3,14157355475 & 1,90987524036e-05 \\
+100000 & 3,14160265369 & 1,00001897203e-05 &100000 & 3,14158310423 & 9,54926903685e-06 \\
+150000 & 3,1415993203 & 6,66680085537e-06 &150000 & 3,14158628736 & 6,36613558491e-06 \\
+200000 & 3,14159765361 & 5,00011476179e-06 &200000 & 3,14158787893 & 4,77457405035e-06\\
+250000 & 3,14159665361 & 4,00010578083e-06 &250000 & 3,14158883386 & 3,81963878349e-06 \\ 
+300000 & 3,14159598693 & 3,33343424197e-06 &300000 & 3,14158947048 & 3,18301595881e-06\\
+350000 & 3,14159551074 & 2,85724077953e-06 &350000 & 3,14158992521 & 2,72828570713e-06\\
+400000 & 3,1415951536 & 2,50009599378e-06 &400000 & 3,14159026626 & 2,38723821644e-06\\
+450000 & 3,14159487582 & 2,22231688607e-06 &450000 & 3,14159053152 & 2,12197916438e-06\\
+500000 & 3,14159465359 & 2,000093692e-06 &500000 & 3,14159074373 & 1,90977198766e-06\\
+550000 & 3,14159447177 & 1,81827480317e-06 &550000 & 3,14159091735 & 1,73614797427e-06\\
+600000 & 3,14159432026 & 1,66675912583e-06 &600000 & 3,14159106204 & 1,59146133161e-06\\
+650000 & 3,14159419205 & 1,53855360452e-06 &650000 & 3,14159118447 & 1,46903419651e-06\\
+700000 & 3,14159408216 & 1,42866315889e-06 &700000 & 3,1415912894 & 1,36409666585e-06\\
+750000 & 3,14159398692 & 1,33342480257e-06 &750000 & 3,14159138035 & 1,27315081766e-06\\
+800000 & 3,14159390359 & 1,25009127983e-06 &800000 & 3,14159145993 & 1,19357321449e-06\\
+850000 & 3,14159383006 & 1,17656170495e-06 &850000 & 3.14159153014 & 1.12335768421e-06 \\
+900000 & 3,1415937647 & 1,11120210766e-06 &900000 & 3,14159159256 & 1,06094389052e-06 \\
+950000 & 3,14159370622 & 1,05272246476e-06 &950000 & 3,1415916484 & 1,00509997125e-06\\
+1000000 & 3,14159365359 & 1,00009077419e-06 & 1000000 & 3,14159169866 & 9,54840446266e-07\\
+
+\hline   
+\hline   
+\end{tabular}
+\label{tabpicomp}
+\end{table}
+
+\newpage{}
+
+\subsection{Constante de Euler-Mascheroni($\gamma$)}
+A constante de Euler-Mascheroni está presente na teoria dos números, ainda não provou-se que esta constante realmente é um número irracional, mas se não for seu denominador será gigantesco. O seu valor aproximado é dito como $0,5772156649$.
+Será apresentado duas maneiras de calcular a constante de Euler-Mascheroni utilizando algoritmos numéricos com critério de parada por precisão 6, ou pelo numero de iterações igual a 1000000. O primeiro algoritmo é realizando a partir de uma serie infinita representado por $\sum\limits_{k=1}^{n} \frac{1}{k} - ln(n)$\cite{EulerM}. Pode ser visto que o algoritmo 7 retrata a formula e com a sua execução foi montado a tabela \ref{tabeulerm1}. O segundo algoritmo utiliza frações continuadas expressadas como $\sum\limits_{k=1}^{\infty} \frac{1}{k} - log(\frac{k+1}{k})$\cite{eulerm2}. Pode ser visto que o algoritmo 8 que retrata a formula e com a sua execução foi montada a tabela \ref{tabeulerm2}. Para comparar a eficiência dos algoritmos foi montada a tabela \ref{tabeulermcomp}, onde podemos ver a convergência das formulas, onde as duas estão convergindo lentamente para o resultado, a segunda é um pouco mais rapida mas as duas são custosas computacionalmente.
+
+\newpage{}
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+eulerMascheroni = 0.0
+iteracao = 1
+gamma = 0.5772156649
+while iteracao < 1000000:
+	eulerMascheroni += 1.0/iteracao
+    if abs(gamma - 
+    (eulerMascheroni-(math.log(iteracao,math.e))))
+    <= 0.0000001:
+ 		break 		
+	iteracao += 1
+\end{minted} 
+};;
+\node[title] at (box.north) {Algoritmo 7};
+\end{tikzpicture}
+
+
+\begin{table}[ht]
+\centering
+\caption{Constante de Euler-Mascheroni algoritmo 7}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto &iteração & resultado & erro absoluto \\
+\hline   
+1 & 1,0 & 0,4227843351 &550000 & 0,577216573992 & 9,09092160439e-07 \\
+50000 & 0,577225664868 & 9,99996822126e-06 &600000 & 0,577216498235 & 8,33334593109e-07 \\
+100000 & 0,577220664893 & 4,99999310644e-06 &650000 & 0,577216434132 & 7,6923196235e-07\\
+150000 & 0,577218998231 & 3,33333108915e-06 &700000 & 0,577216379187 & 7,14286792158e-07 \\
+200000 & 0,5772181649 & 2,49999964619e-06 &750000 & 0,577216331568 & 6,66667553828e-07 \\
+250000 & 0,5772176649 & 2,00000036155e-06 &800000 & 0,577216289901 & 6,25000794896e-07 \\
+300000 & 0,577217331567 & 1,66666732571e-06 &850000 & 0,577216253136 & 5,8823615201e-07 \\
+350000 & 0,577217093472 & 1,42857227803e-06 &900000 & 0,577216220456 & 5,55556421089e-07 \\
+400000 & 0,577216914901 & 1,250000907e-06 &950000 & 0,577216191217 & 5,26316587424e-07 \\
+450000 & 0,577216776012 & 1,11111218959e-06 &1000000 & 0,577216164901 & 5,00000715276e-07 \\
+500000 & 0,577216664901 & 1,00000129843e-06 & - & - & - \\
+
+\hline   
+\hline   
+\end{tabular}
+\label{tabeulerm1}
+\end{table}
+
+\begin{tikzpicture}
+  \node[snippet](box){
+\begin{minted}{python}
+eulerMascheroni = 0.0
+iteracao = 1.0
+gamma = 0.5772156649
+while iteracao < 1000001:
+	eulerMascheroni += (1.0/iteracao) 
+	- math.log((iteracao+1) / iteracao) 
+ 	if abs(gamma - eulerMascheroni)
+ 	<= 0.0000001:
+  		break 		
+ 	iteracao += 1
+\end{minted} 
+};;
+\node[title] at (box.north) {Algoritmo 8};
+\end{tikzpicture}
+
+\newpage{}
+\begin{table}[ht]
+\centering
+\caption{Constante de Euler-Mascheroni algoritmo 8}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+iteração & resultado & erro absoluto & iteração & resultado & erro absoluto\\
+\hline   
+1 & 0,30685281944 & 0,27036284546 &550000 & 0,577214755812 & 9,09088012202e-07\\
+50000 & 0,577205665068 & 9,9998317884e-06 &600000 & 0,577214831569 & 8,33330627836e-07\\
+100000 & 0,577210664943 & 4,99995677561e-06 &650000 & 0,577214895672 & 7,6922823955e-07\\
+150000 & 0,577212331587 & 3,33331326641e-06 &700000 & 0,577214950617 & 7,14283313052e-07\\
+200000 & 0,577213164912 & 2,49998803703e-06 &750000 & 0,577214998236 & 6,66664361271e-07\\
+250000 & 0,577213664908 & 1,99999177808e-06 &800000 & 0,577215039902 & 6,24997766874e-07\\
+300000 & 0,57721399824 & 1,66666046719e-06 &850000 & 0,577215076667 & 5,88233112442e-07\\
+350000 & 0,577214236334 & 1,42856647278e-06 &900000 & 0,577215109347 & 5,55553422044e-07\\
+400000 & 0,577214414904 & 1,24999584494e-06 &950000 & 0,577215138586 & 5,26313722604e-07\\
+450000 & 0,577214553792 & 1,11110750933e-06 &1000000 & 0,577215164902 & 4,99997971914e-07\\
+500000 & 0,577214664903 & 9,99996811468e-07 & - & - &-  \\
+\hline   
+\hline   
+\end{tabular}
+\label{tabeulerm2}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Constante de Euler-Mascheroni Comparação dos algoritmos}
+\vspace{0.5cm}
+\begin{tabular}{c|c|c|c|c|c}
+\hline   
+\hline   
+ite1 & resultado 1 & erro absoluto 1 & ite2 & resultado 2 & erro absoluto 2\\
+\hline   
+1 & 1,0 & 0,4227843351 &1,0 & 0,30685281944 & 0,27036284546 \\
+50000 & 0,577225664868 & 9,99996822126e-06 &50000 & 0,577205665068 & 9,9998317884e-06\\
+100000 & 0,577220664893 & 4,99999310644e-06 &100000 & 0,577210664943 & 4,99995677561e-06 \\
+150000 & 0,577218998231 & 3,33333108915e-06 &150000 & 0,577212331587 & 3,33331326641e-06\\
+200000 & 0,5772181649 & 2,49999964619e-06 &200000 & 0,577213164912 & 2,49998803703e-06\\
+300000 & 0,577217331567 & 1,66666732571e-06 &300000 & 0,57721399824 & 1,66666046719e-06\\
+400000 & 0,577216914901 & 1,250000907e-06 &400000 & 0,577214414904 & 1,24999584494e-06\\
+500000 & 0,577216664901 & 1,00000129843e-06 &500000 & 0,577214664903 & 9,99996811468e-07\\
+600000 & 0,577216498235 & 8,33334593109e-07 &600000 & 0,577214831569 & 8,33330627836e-07\\
+700000 & 0,577216379187 & 7,14286792158e-07 &700000 & 0,577214950617 & 7,14283313052e-07\\
+800000 & 0,577216289901 & 6,25000794896e-07 &800000 & 0,577215039902 & 6,24997766874e-07\\
+900000 & 0,577216220456 & 5,55556421089e-07 &900000& 0,577215109347 & 5,55553422044e-07\\
+950000 & 0,577216191217 & 5,26316587424e-07 &950000 & 0,577215138586 & 5,26313722604e-07\\
+1000000 & 0,577216164901 & 5,00000715276e-07 &1000000 & 0,577215164902 & 4,99997971914e-07\\
+\hline   
+\hline   
+\end{tabular}
+\label{tabeulermcomp}
+\end{table}
+
+\section{Conclusão}
+Atráves da pesquisa feita sobre métodos computacionais com ênfase em cálculos iterativos, podemos concluir que a aplicação dessas técnicas não é trivial, sendo assim o entendimento do assunto foi essencial para a transformação das formulas em algoritmos, pois antes da pesquisa não tínhamos nenhuma base teórica para começar a resolver os problemas propostos, como a base pratica não tinha sido explorada anteriormente, essa foi a primeira vez que utilizando métodos computacionais para representar formulas e analisar a convergência das mesmas. Podemos afirmar que esse trabalho acrescentou na nossa vida acadêmica pela pratica proporcionada.
+
+\bibliographystyle{plain}
+\bibliography{sbc-template}
+
+
+\end{document}

@@ -1,0 +1,8 @@
+ouro = 1.0
+iteracoes = 1
+phi = 1.61803398875
+while iteracoes < 50:
+	if abs(phi - ouro) <= 0.00000000001:
+		break
+	ouro = 1 + (1.0/ouro)
+	iteracoes += 1

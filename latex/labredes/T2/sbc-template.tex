@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+%\usepackage[latin1]{inputenc}  
+\usepackage[utf8]{inputenc}  
+% UTF-8 encoding is recommended by ShareLaTex
+
+     
+\sloppy
+
+\title{Exercício 2 - Laboratório de Redes de Computadores}
+
+\author{Matheus S. Redecker\inst{1}}
+
+
+\address{Pontifícia Universidade Católica do Rio Grande do Sul - PUCRS
+  \email{  matheus.redecker@acad.pucrs.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\section{Exercícios}
+
+    \subitem{1)}
+        \subsubitem{IP: } 10.32.143.167
+        \subsubitem{Máscara: }  255.255.255.0
+        \subsubitem{Outras Informações que podem ser obtidas são, endereço de broadcast, endereço de hardware, endereço de IPv6, taxa de pacotes enviados e recebidos, tudo isso de cada interface de rede.}
+        
+    \subitem{2)}
+        \subsubitem{a)} Sim, $2^{16}$ subredes e $2^{8}$ hosts.
+        \subsubitem{b)} 10.0.0.0 
+        \subsubitem{c)} 10.32.143.255
+        
+    \subitem{3)}
+        \subsubitem{a)} \\
+        ping 10.32.143.194 -p abcd \\
+        Manda um echo request com a área de dados com a repetição do valor "abcd". \\
+        MAC destino: a4:1f:72:f5:90:83 \\
+        MAC origem: a4:1f:72:f5:90:8e\\
+        Ip origem: 10.32.143.167\\
+        -------------------------------------------------------------------------------------------- \\
+        ping 10.32.143.194 -t 1\\
+        Manda um echo request com o ttl 1. \\
+        MAC destino: a4:1f:72:f5:90:83 \\
+        MAC origem: a4:1f:72:f5:90:8e\\
+        Ip origem: 10.32.143.167
+        
+        \subsubitem{b)} Para uma máquina da rede são gerados pacotes de ICMP echo request e echo reply, já para uma maquina fora da rede, é gerado um pacote DNS para resolver o endereço IP associado ao endereço, e ai sim é enviado os pacotes ICMP de echo request e echo reply.
+        
+        \subsubitem{c)}\\
+         ping www.pucrs.br -t 1\\
+         2 pacotes são gerados, um echo request para o ipv4: 201.54.140.10 com endereço MAC: 00:01:02:23:ea:a6 e logo após um pacote time-to-live exceeded foi lançado \\
+         ping www.pucrs.br -t 2 \\
+         Mesmo caso do ttl 1 \\
+         ping www.pucrs.br -t 3 \\
+         Mesmo caso do ttl 1 e 2\\
+         ping www.pucrs.br -t 4 \\
+         É gerado um pacote echo request com o mesmo ip e mac citados acima, mas recebe o echo reply com ttl 61.
+         
+         
+        
+    \subitem{4)}
+        \subsubitem{i)} \\
+        traceroute 10.32.143.194 \\ 
+        Envia pacotes UDP aumentando o ttl de um em um, para o endereço ip, recebe pacotes ICMP destination unreacheble, pois não consegue acessar uma porta, até mandar um pacote UDP que consegue entrar. Neste caso não temos nenhum ttl exceeded. 
+   
+    \begin{table}[ht]
+    \centering
+    \caption{traceroute to 10.32.143.194 (10.32.143.194)}
+    \vspace{0.5cm}
+    \begin{tabular}{c|c|c|c|c|c}
+    \hline   
+    \hline   
+    1 & 10.32.143.194 & (10.32.143.194) & 0.150 ms & 0.133 ms & 0.122 ms  \\
+    \hline   
+    \hline   
+    \end{tabular}
+    \end{table}
+    
+        \subsubitem{ii)}
+        traceroute www.pucrs.br\\
+        Envia pacotes UDP aumentando o ttl começando em um até a quantidade que consegue achar o host destino, neste caso ele sobe até quatro até obter uma resposta. Se ele não consegue chegar ele recebe uma mensagem de ttl exceeded, se ele não consegue por conta da porta que ele está tentando acessar é uma mensagem ICMP de port unreacheble.
+        
+            \begin{table}[ht]
+    \centering
+    \caption{traceroute to www.pucrs.br (201.54.140.10)}
+    \vspace{0.5cm}
+    \begin{tabular}{c|c|c|c|c|c}
+    \hline   
+    \hline   
+ 1 & 10.32.143.1 & (10.32.143.1) &  0.184 ms & 0.204 ms&  0.232 ms\\
+ 2 & 10.30.73.251 & (10.30.73.251) & 1.634 ms & 1.656 ms & 1.726 ms\\
+ 3 & 10.0.7.18 & (10.0.7.18) & 1.699 ms & 1.791 ms & 1.807 ms\\
+ 4 & libra.pucrs.br & (201.54.140.10) &  1.750 ms & 1.753 ms&  1.852 ms  \\
+    \hline   
+    \hline   
+    \end{tabular}
+    \end{table}
+       \newpage{}
+       \subsubitem{iii)}
+    
+    traceroute www.google.com 
+    O começo é parecido com o domínio da pucrs.br mas depois que ele sai do domínio da PUC ele tem um pouco mais de dificuldade para encontrar os intermediários, pois por muitas vezes ele tem que resolver a DNS, e isso faz com que ele tenha um trabalho que aqui dentro ele não tinha.
+    \begin{table}[ht]
+    \centering
+    \caption{traceroute to www.google.com (216.58.222.36)}
+    \vspace{0.5cm}
+    \begin{tabular}{c|c|c|c|c|c}
+    \hline   
+    \hline   
+ 1 & 10.32.143.1& (10.32.143.1)&  0.185 ms & 0.209 ms & 0.202 ms \\
+ 2 & 10.30.73.251& (10.30.73.251) & 1.467 ms & 1.490 ms & 1.545 ms \\
+ 3 & 10.0.7.18& (10.0.7.18) & 1.549 ms & 1.550 ms & 1.611 ms \\
+ 4 & 201.54.129.1& (201.54.129.1) & 2.206 ms & 2.220 ms & 2.327 ms \\
+ 5 & puc.metropoa.tche.br &(200.132.73.45) & 2.557 ms & 2.600 ms & 2.549 ms\\
+ 6 & mlxe8.tche.br& (200.19.246.5) & 18.320 ms & 22.392 ms & 20.399 ms \\
+ 7 & 200.143.253.193& (200.143.253.193) & 1.844 ms & 1.858 ms&  1.903 ms \\
+ 8 & 200.143.253.189& (200.143.253.189)& 2.206 ms & 2.250ms & 16.534 ms \\
+ 9 & sp2-pr-oi.bkb.rnp.br &(200.143.252.61) & 23.859ms &23.508 ms & 8.842ms\\
+10 & sp-sp2.bkb.rnp.br &(200.143.253.37) & 22.928 ms & 22.930 ms&22.188 ms \\
+11 & as15169.sp.ix.br &(187.16.216.55) & 27.850 ms & 27.837 ms & 27.723 ms \\
+12 & 216.239.51.230& (216.239.51.230) & 29.808 ms & 29.782 ms & 29.789 ms \\
+13 & 209.85.143.21& (209.85.143.21) & 22.781 ms & 22.726 ms & 21.868 ms \\
+14 & gru09s17-in-f36.1e100.net&(216.58.222.36)&23.349ms&21.982ms&23.135ms\\
+    \hline   
+    \hline   
+    \end{tabular}
+    \end{table}
+
+
+\subsubitem{g)} O Wireshark mostra que quando não consta o endereço ARP na tabela, é enviado uma mensagem em broadcast perguntando qual o endereço MAC do IP enviado.
+\subsubitem{h)} Sim, ARP funciona para descobrir o endereço MAC associado ao IP desejado.
+\subsubitem{i)} O endereço para fora da rede fica na tabela ARP como o endereço do roteador, pois é ele que nos liga com a internet.
+
+    \subitem{6)} A tabela mostra a tabela de roteamento do kernel, onde o campo destino que se refere para onde deve rotear o pacote, o roteador ligado, a máscara, as opções habilitadas, a métrica e a interface que está sendo usada para cada rota. A primeira linha diz respeito as redes locais, e a segunda para qualquer outra rede deve-se mandar para o roteador, com suas devidas informações citadas acima. 
+    
+    \begin{table}[ht]
+    \centering
+    \caption{Tabela de Roteamento IP do Kernel}
+    \vspace{0.5cm}
+    \begin{tabular}{c|c|c|c|c|c|c|c}
+    \hline   
+    \hline   
+    Destino & Roteador & MáscaraGen. & Opções & Métrica & Ref & Uso & Iface \\
+    \hline   
+    0.0.0.0 & 10.32.143.1 & 0.0.0.0 & UG & 0 & 0 & 0 &eth0 \\
+    10.32.143.0 & 0.0.0.0 & 255.255.255.0 & U & 1 & 0 & 0& eth0 \\
+    \hline   
+    \hline   
+    \end{tabular}
+    \end{table}
+
+\end{document}

@@ -6,12 +6,14 @@ This repository is to save my academic projects.
 
 ###Latex
 
-- [Projeto de Interfaces](interface) 
-- [Sistemas Operacionais(cc)](sisop)
-- [Redes de Computadores I](redesI)
-- [Laboratorio de Redes de Computadores](labredes)
+- [Projeto de Interfaces](latex/interface) 
+- [Sistemas Operacionais(cc)](latex/sisop)
+- [Redes de Computadores I](latex/redesI)
+- [Laboratorio de Redes de Computadores](latex/labredes)
+- [Metodos Computacionais(cc)](latex/metodos)
 
 ###Code
+Soon
 
 Please if you use something inside this repository be sure to give credit
 

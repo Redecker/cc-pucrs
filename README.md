@@ -10,7 +10,16 @@ This repository is to save my academic projects.
 - [Sistemas Operacionais(cc)](latex/sisop)
 - [Redes de Computadores I](latex/redesI)
 - [Laboratorio de Redes de Computadores](latex/labredes)
-- [Metodos Computacionais(cc)](latex/metodos)
+- [Métodos Computacionais(cc)](latex/metodos)
+- [Inteligencia Artificial](latex/ai)
+- [Sistemas Embarcados](latex/embarcados)
+- [Entretenimento Digital](latex/entretenimento)
+- [Programação Paralela](latex/paralela)
+- [Redes de Computadores II](latex/redesII)
+- [Redes de Computadores III](latex/redesIII)
+- [Programação de Perifericos](latex/perifericos)
+- [](latex/entrep)
+- [](latex/msi)
 
 ###Code
 - Soon

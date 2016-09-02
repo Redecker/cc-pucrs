@@ -1,0 +1,221 @@
+1) server 10.32.143.223 | cliente 10.32.143.194
+
+2) a) i)
+
+iperf -c 10.32.143.223 -t 30 -w 1k -p 5001
+[  5] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 44741
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0-30.1 sec  85.0 MBytes  23.7 Mbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 4k -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 44740
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-30.0 sec   150 MBytes  42.0 Mbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 8k -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 44760
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-30.0 sec   322 MBytes  90.1 Mbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 32k -p 5001
+[  5] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 44769
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0-30.0 sec   337 MBytes  94.1 Mbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 128k -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 44830
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-30.0 sec   337 MBytes  94.1 Mbits/sec
+
+2) a) ii)
+
+iperf -c 10.32.143.223 -u -t 30 -b 50k -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 59149
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  4]  0.0-30.3 sec   185 KBytes  50.0 Kbits/sec   0.017 ms    0/  129 (0%)
+
+iperf -c 10.32.143.223 -u -t 30 -b 1M -p 5001
+[  3] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 35444
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.0 sec  3.58 MBytes  1000 Kbits/sec   0.011 ms    0/ 2553 (0%)
+
+iperf -c 10.32.143.223 -u -t 30 -b 5M -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 41515
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  4]  0.0-30.0 sec  17.9 MBytes  5.00 Mbits/sec   0.008 ms    0/12756 (0%)
+[  4]  0.0-30.0 sec  1 datagrams received out-of-order
+
+iperf -c 10.32.143.223 -u -t 30 -b 10M -p 5001
+[  3] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 48244
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.0 sec  35.8 MBytes  10.0 Mbits/sec   0.007 ms    0/25511 (0%)
+[  3]  0.0-30.0 sec  1 datagrams received out-of-order
+
+iperf -c 10.32.143.223 -u -t 30 -b 50M -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 54822
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  4]  0.0-30.0 sec   179 MBytes  50.0 Mbits/sec   0.009 ms    0/127660 (0%)
+[  4]  0.0-30.0 sec  1 datagrams received out-of-order
+
+
+-------------------- SAIDA DO LEO-----------------
+labredes@labredes-OptiPlex-3010 ~ $ iperf -c 10.32.143.223 -u -t 30 -b 50k -p 5001
+------------------------------------------------------------
+Client connecting to 10.32.143.223, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.32.143.194 port 59149 connected with 10.32.143.223 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-30.3 sec   185 KBytes  50.0 Kbits/sec
+[  3] Sent 129 datagrams
+[  3] Server Report:
+[  3]  0.0-30.3 sec   185 KBytes  50.0 Kbits/sec   0.017 ms    0/  129 (0%)
+
+
+labredes@labredes-OptiPlex-3010 ~ $ iperf -c 10.32.143.223 -u -t 30 -b 1M -p 5001
+------------------------------------------------------------
+Client connecting to 10.32.143.223, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.32.143.194 port 35444 connected with 10.32.143.223 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-30.0 sec  3.58 MBytes  1000 Kbits/sec
+[  3] Sent 2553 datagrams
+[  3] Server Report:
+[  3]  0.0-30.0 sec  3.58 MBytes  1000 Kbits/sec   0.011 ms    0/ 2553 (0%)
+
+
+labredes@labredes-OptiPlex-3010 ~ $ iperf -c 10.32.143.223 -u -t 30 -b 5M -p 5001
+------------------------------------------------------------
+Client connecting to 10.32.143.223, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.32.143.194 port 41515 connected with 10.32.143.223 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-30.0 sec  17.9 MBytes  5.00 Mbits/sec
+[  3] Sent 12757 datagrams
+[  3] Server Report:
+[  3]  0.0-30.0 sec  17.9 MBytes  5.00 Mbits/sec   0.008 ms    0/12756 (0%)
+[  3]  0.0-30.0 sec  1 datagrams received out-of-order
+
+
+labredes@labredes-OptiPlex-3010 ~ $ iperf -c 10.32.143.223 -u -t 30 -b 10M -p 5001
+------------------------------------------------------------
+Client connecting to 10.32.143.223, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.32.143.194 port 48244 connected with 10.32.143.223 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-30.0 sec  35.8 MBytes  10.0 Mbits/sec
+[  3] Sent 25512 datagrams
+[  3] Server Report:
+[  3]  0.0-30.0 sec  35.8 MBytes  10.0 Mbits/sec   0.006 ms    0/25511 (0%)
+[  3]  0.0-30.0 sec  1 datagrams received out-of-order
+
+
+labredes@labredes-OptiPlex-3010 ~ $ iperf -c 10.32.143.223 -u -t 30 -b 50M -p 5001
+------------------------------------------------------------
+Client connecting to 10.32.143.223, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.32.143.194 port 54822 connected with 10.32.143.223 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-30.0 sec   179 MBytes  50.0 Mbits/sec
+[  3] Sent 127661 datagrams
+[  3] Server Report:
+[  3]  0.0-30.0 sec   179 MBytes  50.0 Mbits/sec   0.009 ms    0/127660 (0%)
+[  3]  0.0-30.0 sec  1 datagrams received out-of-order
+
+
+
+
+
+
+------------------------------3
+
+iperf -c 10.32.143.223 -t 30 -w 1k -p 5001
+[  5] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 42419
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0-35.4 sec   896 KBytes   207 Kbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 4k -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 42447
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-39.1 sec  1.00 MBytes   214 Kbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 8k -p 5001
+[  5] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 42456
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0-34.6 sec  1.62 MBytes   394 Kbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 32k -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 42460
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-31.6 sec  5.12 MBytes  1.36 Mbits/sec
+
+iperf -c 10.32.143.223 -t 30 -w 128k -p 5001
+[  5] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 42582
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0-30.3 sec  15.2 MBytes  4.22 Mbits/sec
+
+---------------------- otro ii)
+
+iperf -c 10.32.143.223 -u -t 30 -b 50K -p 5001
+[  3] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 35437
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.3 sec   185 KBytes  50.0 Kbits/sec  23.304 ms    0/  129 (0%)
+
+iperf -c 10.32.143.223 -u -t 30 -b 1M -p 5001
+[  4] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 45741
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  4]  0.0-30.1 sec  3.58 MBytes   998 Kbits/sec  29.747 ms 1143/ 2553 (45%)
+[  4]  0.0-30.1 sec  1143 datagrams received out-of-order
+
+iperf -c 10.32.143.223 -u -t 30 -b 5M -p 5001
+[  3] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 59187
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.1 sec  17.9 MBytes  4.99 Mbits/sec  21.662 ms    1/12757 (0.0078%)
+[  3]  0.0-30.1 sec  10322 datagrams received out-of-order
+
+iperf -c 10.32.143.223 -u -t 30 -b 10M -p 5001
+[  3] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 57515
+[  3]  0.0-30.0 sec  35.8 MBytes  10.0 Mbits/sec  16.190 ms 22666/25511 (89%)
+[  3]  0.0-30.0 sec  22666 datagrams received out-of-order
+
+iperf -c 10.32.143.223 -u -t 30 -b 50M -p 5001
+[  3] local 10.32.143.223 port 5001 connected with 10.32.143.194 port 44634
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.0 sec   179 MBytes  50.0 Mbits/sec  16.684 ms  103/127660 (0.081%)
+[  3]  0.0-30.0 sec  123858 datagrams received out-of-order
+
+
+-------------------------------------4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

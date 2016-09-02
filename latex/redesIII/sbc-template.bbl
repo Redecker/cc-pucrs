@@ -1,0 +1,39 @@
+\begin{thebibliography}{}
+
+\bibitem[Braga ]{newton}
+Braga, N.~C.
+\newblock Esteganografia (a arte de escrever mensagens ocultas) \textit{url:}
+  http://www.newtoncbraga.com.br/index.php/eletronica/52-artigos-diversos/7049-
+  esteganografia-a-arte-de-escrever-mensagens-ocultas-art1175.
+
+\bibitem[Duarte ]{tecnica}
+Duarte, O. C. M.~B.
+\newblock Esteganografia \textit{url:}
+  http://www.gta.ufrj.br/grad/09\_1/versao-final/ stegano/index.html.
+
+\bibitem[Hariri et~al. 2011]{methods}
+Hariri, M., Karimi, R., and Nosrati, M. (2011).
+\newblock An introduction to steganography methods.
+\newblock {\em World Applied Programming}, 1(3):191--195.
+
+\bibitem[Kunz ]{ufrgs}
+Kunz, L.
+\newblock Esteganografia em imagens usando codifica\c{c}\~ao de huffman
+  \textit{url:} http://www.inf.ufrgs.br/~lkunz/cpd/.
+
+\bibitem[PETRI 2004]{tcc}
+PETRI, M. (2004).
+\newblock Esteganografia.
+\newblock {\em Instituto Superior Tupy, SC, 62p}.
+
+\bibitem[Provos and Honeyman 2003]{hideAndSeek}
+Provos, N. and Honeyman, P. (2003).
+\newblock Hide and seek: An introduction to steganography.
+\newblock {\em Security \& Privacy, IEEE}, 1(3):32--44.
+
+\bibitem[Wu and Tsai 2003]{wu2003}
+Wu, D.-C. and Tsai, W.-H. (2003).
+\newblock A steganographic method for images by pixel-value differencing.
+\newblock {\em Pattern Recognition Letters}, 24(9):1613--1626.
+
+\end{thebibliography}

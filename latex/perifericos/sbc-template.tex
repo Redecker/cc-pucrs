@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+%\usepackage[latin1]{inputenc}  
+\usepackage[utf8]{inputenc}  
+% UTF-8 encoding is recommended by ShareLaTex
+
+     
+\sloppy
+
+\title{Trabalho 2 \\ Programação de Periféricos}
+
+\author{Leonardo G. Carvalho\inst{1}, Matheus S. Redecker\inst{1}}
+
+
+\address{Pontifícia Universidade Católica do Rio Grande do Sul - PUCRS
+  \email{  \{leonardo.gubert\}\{matheus.redecker\} @acad.pucrs.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+
+\section{Protocolo UART}
+O protocolo UART (Universal asynchronous receiver/transmitter) é um dispositivo de hardware usado para a transmissão de dados entre comunicações paralelas e seriais. As configurações de formato e velocidade de transmissão podem ser configuradas para cada aplicação. Esse protocolo é usado junto com um circuito digital usado para comunicação serial sobre um computador ou um periférico. 
+
+\section{Funcionamento do Programa}
+
+O programa para mostrar o funcionamento do protocolo consiste em conjunto com a raspberry pi e o arduino ter uma comunicação a fim de contar quantas vezes cada botão do arduino é pressionado, e então mandar essa informação para a raspberry que então envia uma sinalização para o arduino que pisca os leds respectivos para cada botão. Para melhor explicar como isso acontece, temos que ter um programa rodando na raspberry pie que vai esperar ocorrer uma sinalização de botão pressionado anota quantas vezes ele foi pressionado, envia o sinal para o arduino que recebendo essa informação pisca um dos leds para denotar qual botão ele está sinalizando, logo após a quantidade de vezes que esse botão foi sinalizado.
+
+\section{Tarefas realizadas}
+Este trabalho pode ser dividido em 2 partes: O programa que faz a conexão entre o botão e a Raspberry, e o que faz a conexão entre a Rapberry e os LEDs.
+
+Na primeira vez que a implementação do programa que gerencia os botões foi feita foi encontrado algumas dificuldades em fazer o toque do botão ser reconhecido, então um pseudo botão foi feito para fazer os LEDs piscarem conforme um input que é definido pelo terminal. Assim bastava:
+\begin{enumerate}
+\item Acessar a Raspberry Pi
+\item Executar o programa t2raspberry
+\item Informar qual o número do LED (ou o que seria o botão pressionado) que deve piscar.
+\end{enumerate}
+Este programa irá acumular o número de vezes e piscar os LEDs da seguinte forma: O primeiro LED informa qual "botão" foi pressionado, e o segundo informas quantas vezes. Com isso era feito a simulação dos três botões.
+
+Depois da ajuda do professor, foi desenvolvido a iteração com os botões, onde os passos são os mesmo, o que muda é ao invés de utilizar o teclado para simular o botão, o botão é precionado e então os leds piscam.
+
+
+
+\end{document}

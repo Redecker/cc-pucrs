@@ -13,7 +13,7 @@ This repository is to save my academic projects.
 - [Metodos Computacionais(cc)](latex/metodos)
 
 ###Code
-Soon
+- Soon
 
 Please if you use something inside this repository be sure to give credit
 

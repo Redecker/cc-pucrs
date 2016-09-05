@@ -22,7 +22,7 @@ This repository is to save my academic projects.
 - [Sistemas Operacionais(cc)](latex/sisop)
 
 ###Code
-- Soon
+- [Laboratório de Redes de Computadores](code/labredes)
 
 ###[Publications](publications)
 - Comparing Approaches to Subjectivity Classification: A Study on Portuguese Tweets - PROPOR 2016

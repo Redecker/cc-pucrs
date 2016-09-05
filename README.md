@@ -23,6 +23,7 @@ This repository is to save my academic projects.
 
 ###Code
 - [Laboratório de Redes de Computadores](code/labredes)
+- [Desenvolvimento de Sistemas](https://github.com/PUCRSOpenSource/taciturn-duck)
 
 ###[Publications](publications)
 - Comparing Approaches to Subjectivity Classification: A Study on Portuguese Tweets - PROPOR 2016

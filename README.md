@@ -1,6 +1,6 @@
 # Academic Projects
 
-This repository is to save my academic projects.
+This repository contains my academic projects.
 
 ## Computer Science - PUCRS
 

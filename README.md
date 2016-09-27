@@ -26,6 +26,7 @@ This repository contains my academic projects.
 - [Implementação de Banco de Dados](code/banco)
 - [Laboratório de Redes de Computadores](code/labredes)
 - [Redes de Computadores II](code/redesII)
+- [Sistemas Embarcados](https://github.com/Redecker/hellfireos)
 
 ###[Publications](publications)
 - Comparing Approaches to Subjectivity Classification: A Study on Portuguese Tweets - PROPOR 2016

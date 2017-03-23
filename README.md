@@ -1,8 +1,8 @@
-# Academic Projects
+# Trabalhos acadêmicos
 
-This repository contains my academic projects.
+Trabalhos acadêmicos do curso de Ciência da Computação da PUCRS.
 
-### Latex
+### Artigos/Relatórios em Latex
 
 - [Entretenimento Digital](latex/entretenimento) 
 - [Fundamentals of Digital Entrepreneurship](latex/entrep)
@@ -19,7 +19,7 @@ This repository contains my academic projects.
 - [Sistemas Embarcados](latex/embarcados)
 - [Sistemas Operacionais(cc)](latex/sisop)
 
-### Code
+### Códigos
 - [Desenvolvimento de Sistemas](https://github.com/PUCRSOpenSource/taciturn-duck)
 - [Implementação de Banco de Dados](code/banco)
 - [Laboratório de Redes de Computadores](code/labredes)

@@ -2,9 +2,7 @@
 
 This repository contains my academic projects.
 
-## Computer Science - PUCRS
-
-###Latex
+### Latex
 
 - [Entretenimento Digital](latex/entretenimento) 
 - [Fundamentals of Digital Entrepreneurship](latex/entrep)
@@ -21,19 +19,11 @@ This repository contains my academic projects.
 - [Sistemas Embarcados](latex/embarcados)
 - [Sistemas Operacionais(cc)](latex/sisop)
 
-###Code
+### Code
 - [Desenvolvimento de Sistemas](https://github.com/PUCRSOpenSource/taciturn-duck)
 - [Implementação de Banco de Dados](code/banco)
 - [Laboratório de Redes de Computadores](code/labredes)
 - [Redes de Computadores II](code/redesII)
-- [Redes de Computadores III](https://github.com/Redecker/OEscondedor)
 - [Sistemas Embarcados](https://github.com/Redecker/hellfireos)
-
-
-###[Publications](publications)
-- Comparing Approaches to Subjectivity Classification: A Study on Portuguese Tweets - PROPOR 2016
-- Classificação de Sentimentos em Nível de Sentença: uma Abordagem de Múltiplas Camadas para Tweets em Língua Portuguesa - ENIAC 2016 (Soon)
-
-Please if you use something inside this repository be sure to give credit
 
 Matheus Redecker - matheus.redecker@acad.pucrs.br
